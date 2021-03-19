@@ -1,0 +1,8 @@
+<suite name="search-module">
+  <test name ="search-test-java">
+    <classes>
+      <parameter name="keyword" value ="Java"/>
+      <class name="com.searchmodule.tests.SearchTest"/>
+    </classes>>
+  </test>>
+</suite>
