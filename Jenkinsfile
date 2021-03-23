@@ -1,4 +1,4 @@
-/*  /Si vamos a ejecutar esto en otra maquina que no sea local tiene que ser asi y sino abajo esta el codigo
+  //Si vamos a ejecutar esto en otra maquina que no sea local tiene que ser asi y sino abajo esta el codigo
 
 pipeline {
 //master executor deber ser 0 numero de ejecuciones
@@ -9,7 +9,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
+                    args '-v $HOME/.m2:/root/.m2'
                 }
             }
             steps {
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                 //vamos a construir la imagen con el nombre que le pongamos
-                	app = docker.build("lastbuild/selenium-docker")
+                	app = docker.build("1112170559/seleniumImage")
                 }
             }
         }
@@ -37,7 +37,8 @@ pipeline {
             }
         }
     }
-} */
+}
+/*
 pipeline {
     // master executor should be set to 0
     agent any
@@ -65,3 +66,4 @@ pipeline {
         }
     }
 }
+ */
