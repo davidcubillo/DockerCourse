@@ -1,4 +1,5 @@
-/* //  /Si vamos a ejecutar esto en otra maquina que no sea local tiene que ser asi y sino abajo esta el codigo
+/*
+///  /Si vamos a ejecutar esto en otra maquina que no sea local tiene que ser asi y sino abajo esta el codigo
 
 pipeline {
 //master executor deber ser 0 numero de ejecuciones
@@ -37,8 +38,7 @@ pipeline {
             }
         }
     }
-} */
-
+}
 pipeline {
     // master executor should be set to 0
     agent any
@@ -66,4 +66,38 @@ pipeline {
         }
     }
 }
+ */
 
+pipeline {
+    agent none
+    stages {
+        stage('Build Jar') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+        stage('Build Image') {
+            steps {
+                script {
+                	app = docker.build("vinsdocker/selenium-docker")
+                }
+            }
+        }
+        stage('Push Image') {
+            steps {
+                script {
+			        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+			        	app.push("${BUILD_NUMBER}")
+			            app.push("latest")
+			        }
+                }
+            }
+        }
+    }
+}
