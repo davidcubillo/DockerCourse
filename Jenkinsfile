@@ -68,6 +68,7 @@ pipeline {
 }
  */
 
+/*
 pipeline {
     agent any
     stages {
@@ -89,6 +90,35 @@ pipeline {
                                     //sh
                 			 sh "docker login --username=${user} --password=${pass}"
                 			 sh "docker push 112170559/lastbuild:latest"
+            }
+        }
+    }
+} */
+
+pipeline {
+    agent any
+    stages {
+        stage('Build Jar') {
+
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+        stage('Build Image') {
+            steps {
+                script {
+                	app = docker.build("112170559/lastbuild")
+                }
+            }
+        }
+        stage('Push Image') {
+            steps {
+                script {
+			        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+			        	app.push("${BUILD_NUMBER}")
+			            app.push("latest")
+			        }
+                }
             }
         }
     }
