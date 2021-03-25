@@ -68,7 +68,7 @@ pipeline {
 }
  */
 
-/*
+
 pipeline {
     agent any
     stages {
@@ -93,32 +93,4 @@ pipeline {
             }
         }
     }
-} */
-
-pipeline {
-    agent any
-    stages {
-        stage('Build Jar') {
-
-            steps {
-                sh 'mvn clean package -DskipTests'
-            }
-        }
-        stage('Build Image') {
-            steps {
-                script {
-                	app = docker.build("112170559/lastbuild")
-                }
-            }
-        }
-        stage('Push Image') {
-                    steps {
-                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                                            //sh
-                        			 sh "docker login --username=${user} --password=${pass}"
-                        			 sh "docker push 112170559/lastbuild:latest"
-                    }
-                }
-            }
-        }
-    }
+} 
