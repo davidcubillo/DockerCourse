@@ -1,4 +1,4 @@
- //  /Si vamos a ejecutar esto en otra maquina que no sea local tiene que ser asi y sino abajo esta el codigo
+/* //  /Si vamos a ejecutar esto en otra maquina que no sea local tiene que ser asi y sino abajo esta el codigo
 
 pipeline {
 //master executor deber ser 0 numero de ejecuciones
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                 //vamos a construir la imagen con el nombre que le pongamos
-                	app = docker.build("112170559/lastbuild")
+                	app = docker.build("1112170559/seleniumImage")
                 }
             }
         }
@@ -37,9 +37,8 @@ pipeline {
             }
         }
     }
-}
+} */
 
-/*
 pipeline {
     // master executor should be set to 0
     agent any
@@ -66,6 +65,5 @@ pipeline {
             }
         }
     }
- */
 }
 
