@@ -1,5 +1,4 @@
-/*
-///  /Si vamos a ejecutar esto en otra maquina que no sea local tiene que ser asi y sino abajo esta el codigo
+/* //  /Si vamos a ejecutar esto en otra maquina que no sea local tiene que ser asi y sino abajo esta el codigo
 
 pipeline {
 //master executor deber ser 0 numero de ejecuciones
@@ -38,7 +37,8 @@ pipeline {
             }
         }
     }
-}
+} */
+
 pipeline {
     // master executor should be set to 0
     agent any
@@ -66,31 +66,4 @@ pipeline {
         }
     }
 }
- */
 
-
-pipeline {
-    agent any
-    stages {
-        stage('Build Jar') {
-            steps {
-                sh 'mvn clean package -DskipTests'
-            }
-        }
-        stage('Build Image') {
-            steps {
-                script {
-                	app = docker.build("112170559/lastbuild")
-                }
-            }
-        }
-        stage('Push Image') {
-            steps {
-             withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                                    //sh
-                			 sh "docker login --username=${user} --password=${pass}"
-                			 sh "docker push 112170559/lastbuild:latest"
-            }
-        }
-    }
-} 
