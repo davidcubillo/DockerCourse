@@ -69,15 +69,9 @@ pipeline {
  */
 
 pipeline {
-    agent none
+    agent any
     stages {
         stage('Build Jar') {
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
             steps {
                 sh 'mvn clean package -DskipTests'
             }
@@ -85,7 +79,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                	app = docker.build("vinsdocker/selenium-docker")
+                	app = docker.build("112170559/lastbuild")
                 }
             }
         }
