@@ -8,20 +8,4 @@
       <class name="com.newtours.tests.BookFlightTest"/>
     </classes>>
   </test>>
-  <test name ="book-flight-2">
-    <classes>
-      <parameter name="noOfPassengers" value ="4"/>
-      <parameter name="name" value ="David"/>
-      <parameter name="lastName" value ="Cubillo"/>
-      <class name="com.newtours.tests.BookFlightTest"/>
-    </classes>>
-  </test>>
-  <test name ="book-flight-3">
-    <classes>
-      <parameter name="noOfPassengers" value ="3"/>
-      <parameter name="name" value ="David"/>
-      <parameter name="lastName" value ="Cubillo"/>
-      <class name="com.newtours.tests.BookFlightTest"/>
-    </classes>>
-  </test>>
 </suite>
